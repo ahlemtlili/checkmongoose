@@ -4,7 +4,6 @@ const Person = require("./models/Person");
 connectDB();
 
 const app = express();
-app.use(express.json());
 //Create Many Records with model.create()
 const arrayOfPeople = async () => {
   try {
