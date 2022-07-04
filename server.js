@@ -38,7 +38,7 @@ const arrayOfPeople = async () => {
     console.log(error);
   }
 };
-//arrayOfPeople()
+arrayOfPeople()
 //Find all the people having a given name, using Model.find() -> [Person]
 const findPerson = async (personName) => {
   try {
@@ -48,7 +48,7 @@ const findPerson = async (personName) => {
     console.log(error);
   }
 };
-//findPerson("youssef")
+findPerson("youssef")
 //Find just one person which has a certain food in the person's favorites, using
 const findOnePerson = (food) => {
   Person.findOne({ favoriteFoods: food }, function (err, per) {
@@ -58,7 +58,7 @@ const findOnePerson = (food) => {
     console.log(per);
   });
 };
-//findOnePerson(["roz", "pizza"])
+findOnePerson(["roz", "pizza"])
 //Find the (only!!) person having a given _id
 const SearchById = (personId) => {
   Person.findById({ _id: personId }, (err, per) => {
@@ -68,7 +68,7 @@ const SearchById = (personId) => {
     console.log(per);
   });
 };
-//SearchById('62c1b2d85faeaf3375c13ae5')
+SearchById('62c1b2d85faeaf3375c13ae5')
 //Running Find, Edit, then Save
 const findandedit = (Idp, food) => {
   Person.findById({ _id: Idp }, (err, per) => {
@@ -81,7 +81,7 @@ const findandedit = (Idp, food) => {
     }
   });
 };
-//findandedit('62c1d04a1476775a9a5d8a80',"metabga")
+findandedit('62c1d04a1476775a9a5d8a80',"metabga")
 //Find a person by Name and set the person's age to 20
 const findandupdate = (personName, ageup) => {
   Person.findOneAndUpdate(
@@ -95,7 +95,7 @@ const findandupdate = (personName, ageup) => {
     }
   );
 };
-//findandupdate('youssef',32)
+findandupdate('youssef',32)
 //Delete one person by the person's _id
 const findandelete = (Idp) => {
   Person.findByIdAndRemove({ _id: Idp }, (err, per) => {
@@ -106,7 +106,7 @@ const findandelete = (Idp) => {
     }
   });
 };
-//findandelete('62c1d04a1476775a9a5d8a7d')
+findandelete('62c1d505fd462a93ead808aa')
 //Delete Many Documents using model.remove
 const removeMany = (personName) => {
   Person.remove({ name: personName }, (err, per) => {
@@ -115,7 +115,7 @@ const removeMany = (personName) => {
 };
 //removeMany("ahlem")
 //Chain Search Query
-var queryChain = (food )=>{
+const queryChain = (food )=>{
     Person.find({ favoriteFoods:food})
     .sort({ name: 1 })
     .limit(2)
@@ -126,8 +126,21 @@ var queryChain = (food )=>{
     console.log(per)
     });
     };
+    /* Chain Search Query 2eme methode
+var queryChain = (food )=>{
+    Person.find(food:{$in:avoriteFoods})
+    .sort({ name: 1 })
+    .limit(2)
+    .select({ age: 0 })
+    .exec((error, per)=> {
+        error?
+    console.log(error):
+    console.log(per)
+    });
+    };
+    */
 
-queryChain(["mlawi", "rozz"])
+queryChain("roz")
 const port = 5000;
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
