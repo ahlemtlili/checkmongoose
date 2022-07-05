@@ -7,7 +7,7 @@ const app = express();
 //Create Many Records with model.create()
 const arrayOfPeople = async () => {
   try {
-    Person.create([
+   const allPerson=await Person.create([
       {
         name: "ahlem",
         age: 30,
@@ -34,6 +34,7 @@ const arrayOfPeople = async () => {
         favoriteFoods: ["mechoui", "7out"],
       },
     ]);
+    console.log(allPerson);
   } catch (error) {
     console.log(error);
   }
@@ -113,7 +114,7 @@ const removeMany = (personName) => {
     err ? console.log(err) : console.log(per);
   });
 };
-//removeMany("ahlem")
+removeMany("ahlem")
 //Chain Search Query
 const queryChain = (food )=>{
     Person.find({ favoriteFoods:food})
